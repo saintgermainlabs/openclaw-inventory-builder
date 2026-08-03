@@ -44,12 +44,17 @@ OpenClaw must not deploy, restart, delete, or reconfigure Coolify/Tailscale thro
 | Skill | Role |
 |-------|------|
 | [`coolify-readonly`](skills/coolify-readonly/SKILL.md) | Coolify MCP safety contract |
-| [`coolify-inventory`](skills/coolify-inventory/SKILL.md) | Coolify-only inventory → `/knowledge/inventory/coolify/` |
-| [`tailscale-inventory`](skills/tailscale-inventory/SKILL.md) | Tailscale-only inventory → `/knowledge/inventory/tailscale/` |
+| [`inventory_coolify_apps`](skills/inventory_coolify_apps/SKILL.md) | **Preferred:** flat Coolify apps+services → `/knowledge/inventory/coolify/apps.yaml` |
+| [`inventory_tailnet_nodes`](skills/inventory_tailnet_nodes/SKILL.md) | **Preferred:** flat Tailscale nodes → `/knowledge/inventory/tailscale/nodes.yaml` |
+| [`inventory`](skills/inventory/SKILL.md) | Older merged dump skill (prefer the two flat skills above) |
+| [`coolify-inventory`](skills/coolify-inventory/SKILL.md) | Deprecated alias → use `/inventory_coolify_apps` |
+| [`tailscale-inventory`](skills/tailscale-inventory/SKILL.md) | Deprecated alias → use `/inventory_tailnet_nodes` |
 | [`app-dashboard-inventory`](skills/app-dashboard-inventory/SKILL.md) | Dashboard apps catalogue → `/data/apps/inventory/app-dashboard.yaml` |
 | [`check-tailnet-urls`](skills/diagnostics/check_tailnet_urls/SKILL.md) | Probe UI URLs from app-dashboard; report reachable / unreachable |
 | [`diagnose-tailnet-service`](skills/diagnostics/diagnose_tailnet_service/SKILL.md) | Deep-diagnose one Tailnet UI hostname (DNS/HTTP/Docker/Serve) |
 | [`infrastructure-inventory`](skills/infrastructure-inventory/SKILL.md) | Full Coolify (+ Tailscale later) correlation refresh |
+
+**Next (not built yet):** `inventory_coolify_insert_ids` and `inventory_tailnet_insert_ids` — walk the flat lists and fill basic identifying fields per id.
 
 Legacy list/inspect helpers were folded into `infrastructure-inventory`.
 
@@ -70,8 +75,10 @@ Legacy list/inspect helpers were folded into `infrastructure-inventory`.
 
 ```text
 /knowledge/inventory/
-├── coolify/          # coolify-inventory skill
-├── tailscale/        # tailscale-inventory skill
+├── coolify/
+│   └── apps.yaml     # inventory_coolify_apps (flat apps + services)
+├── tailscale/
+│   └── nodes.yaml    # inventory_tailnet_nodes (flat nodes)
 ├── services.yaml     # correlated (infrastructure-inventory)
 ├── overrides.yaml
 ├── generated/

@@ -1,0 +1,14 @@
+generated_at: "2026-08-03T00:00:00Z"
+source: tailscale-readonly
+tools:
+  - list_devices
+nodes:
+  - id: n123
+    hostname: ubuntu-server
+    name: ubuntu-server
+    magicdns: ubuntu-server.tiger-bushmaster.ts.net
+    addresses:
+      - 100.64.0.1
+    online: true
+    tags:
+      - tag:server

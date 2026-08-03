@@ -1,0 +1,39 @@
+{
+  "projects": [
+    {
+      "id": "proj-1",
+      "name": "Demo Project",
+      "environments": [
+        {
+          "id": "env-prod",
+          "name": "production",
+          "applications": [
+            {
+              "id": "app-wp",
+              "name": "WordPress",
+              "status": "running",
+              "domains": ["https://example.com"],
+              "git": { "repository": "owner/repository", "branch": "main" },
+              "server": { "name": "ubuntu-server" }
+            }
+          ],
+          "services": [
+            {
+              "id": "svc-redis",
+              "name": "Redis",
+              "status": "running"
+            }
+          ],
+          "databases": [
+            {
+              "id": "db-pg",
+              "name": "PostgreSQL",
+              "type": "postgresql",
+              "status": "running"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sg-labs.local/schemas/coolify-inventory/inventory.json",
+  "title": "Coolify hierarchical inventory",
+  "type": "object",
+  "required": ["version", "source", "generated_at", "projects"],
+  "additionalProperties": true,
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "generated_at": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "required": ["type", "mcp_server"],
+      "properties": {
+        "type": { "const": "coolify" },
+        "mcp_server": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "projects": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/project"
+      }
+    }
+  },
+  "$defs": {
+    "project": {
+      "type": "object",
+      "required": ["id", "name", "environments"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "environments": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/environment" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "environment": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "applications": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/resource" }
+        },
+        "services": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/resource" }
+        },
+        "databases": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/resource" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "resource": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "status": { "type": "string" },
+        "type": { "type": "string" },
+        "domains": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "git": { "type": "object" },
+        "server": { "type": "object" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

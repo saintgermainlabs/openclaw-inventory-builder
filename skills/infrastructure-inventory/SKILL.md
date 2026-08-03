@@ -31,6 +31,8 @@ If the user requests a write action, explain it belongs to the **future infrastr
 
 ## Prerequisites
 
+- For complete Coolify/Tailscale dumps, prefer the merged [`inventory`](../inventory/SKILL.md) skill first; this skill correlates into `services.yaml`.
+
 - Follow [`coolify-readonly`](../coolify-readonly/SKILL.md) for Coolify MCP safety
 - MCP server `coolify-readonly` configured; Tailscale only if `tailscale-readonly` is approved after evaluation
 - Writable `/knowledge/inventory/` (see repo `docs/ops-verification.md`)

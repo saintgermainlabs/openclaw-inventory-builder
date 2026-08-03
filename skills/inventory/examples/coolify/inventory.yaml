@@ -1,0 +1,19 @@
+version: 1
+source:
+  type: coolify
+  mcp_server: coolify-readonly
+  tools:
+    - list_applications
+    - list_services
+generated_at: "2026-08-03T00:00:00Z"
+apps:
+  - id: app-wp
+    name: WordPress
+    project: demo-project
+    tags:
+      - dashboard
+services:
+  - id: svc-redis
+    name: Redis
+    project: demo-project
+    tags: []

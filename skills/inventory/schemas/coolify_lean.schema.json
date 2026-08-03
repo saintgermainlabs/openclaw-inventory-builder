@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "coolify_lean.schema.json",
+  "title": "Lean Coolify inventory",
+  "type": "object",
+  "required": ["version", "source", "generated_at", "apps", "services"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "generated_at": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "required": ["type", "mcp_server", "tools"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "coolify" },
+        "mcp_server": { "type": "string", "minLength": 1 },
+        "tools": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "apps": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/resource" }
+    },
+    "services": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/resource" }
+    }
+  },
+  "$defs": {
+    "resource": {
+      "type": "object",
+      "required": ["id", "name", "project", "tags"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "project": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

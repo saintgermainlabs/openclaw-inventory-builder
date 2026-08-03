@@ -19,6 +19,15 @@ Legacy staging under `/data/apps/openclaw/skills/` is retired for new syncs.
 ```bash
 PROJ=/path/to/openclaw_coolify_tailnet_inventory
 rsync -az --no-owner --no-group --delete \
+  "$PROJ/skills/inventory_coolify_apps/" \
+  ubuntu:/srv/openclaw/skills/inventory_coolify_apps/
+rsync -az --no-owner --no-group --delete \
+  "$PROJ/skills/inventory_tailnet_nodes/" \
+  ubuntu:/srv/openclaw/skills/inventory_tailnet_nodes/
+rsync -az --no-owner --no-group --delete \
+  "$PROJ/skills/inventory/" \
+  ubuntu:/srv/openclaw/skills/inventory/
+rsync -az --no-owner --no-group --delete \
   "$PROJ/skills/coolify-inventory/" \
   ubuntu:/srv/openclaw/skills/coolify-inventory/
 rsync -az --no-owner --no-group --delete \
@@ -74,6 +83,7 @@ removing stale workspace copies of inventory skills.
 If you still want a workspace override/copy:
 
 ```bash
+/srv/openclaw/deploy-skill.sh inventory
 /srv/openclaw/deploy-skill.sh coolify-inventory
 /srv/openclaw/deploy-skill.sh tailscale-inventory
 /srv/openclaw/deploy-skill.sh app-dashboard-inventory

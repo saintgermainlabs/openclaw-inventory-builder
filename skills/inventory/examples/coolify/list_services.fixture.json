@@ -1,0 +1,16 @@
+{
+  "services": [
+    {
+      "id": "svc-redis",
+      "name": "Redis",
+      "project": "demo-project",
+      "tags": []
+    },
+    {
+      "id": "svc-ts",
+      "name": "tailscale-sidecar",
+      "project": "demo-project",
+      "tags": ["sidecar"]
+    }
+  ]
+}

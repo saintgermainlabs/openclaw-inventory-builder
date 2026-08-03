@@ -13,6 +13,8 @@ metadata:
 
 **Read-only.** Coolify decides which applications exist. Tailscale only supplies private browser URLs.
 
+**Note:** Prefer refreshing complete source dumps with the merged [`inventory`](../inventory/SKILL.md) skill (`/inventory`). This skill still may re-query MCP until extract scripts consume `/knowledge/inventory/*/raw/complete.json`.
+
 ## Hard rules
 
 1. **Coolify is authoritative** for application membership.

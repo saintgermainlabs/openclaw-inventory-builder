@@ -1,0 +1,17 @@
+generated_at: "2026-08-03T00:00:00Z"
+source: coolify-readonly
+tools:
+  - list_applications
+  - list_services
+apps:
+  - id: app-wp
+    name: WordPress
+    project: demo
+    tags:
+      - dashboard
+    kind: application
+  - id: svc-redis
+    name: Redis
+    project: demo
+    tags: []
+    kind: service
