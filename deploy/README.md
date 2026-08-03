@@ -1,15 +1,18 @@
-# Host staging + skill deploy
+# Host skills library + deploy
 
-**Development staging path** (current):
+**Canonical skills library** (host):
 
 ```text
-/data/apps/openclaw/
-├── skills/          # coolify-readonly, coolify-inventory, tailscale-inventory, …
-├── scripts/         # optional shared helpers
-├── docs/
-├── config/
-└── deploy-skill.sh  # promote a skill into OpenClaw runtime
+/srv/openclaw/
+├── skills/            # coolify-readonly, coolify-inventory, tailscale-inventory, …
+├── deploy-skill.sh    # optional: copy a skill into OpenClaw workspace
+└── sandbox/           # unrelated sandbox tooling
 ```
+
+OpenClaw loads this library when the container bind-mounts it and
+`skills.load.extraDirs` includes `/srv/openclaw/skills`.
+
+Legacy staging under `/data/apps/openclaw/skills/` is retired for new syncs.
 
 ## Sync from this repo
 
@@ -17,44 +20,66 @@
 PROJ=/path/to/openclaw_coolify_tailnet_inventory
 rsync -az --no-owner --no-group --delete \
   "$PROJ/skills/coolify-inventory/" \
-  ubuntu:/data/apps/openclaw/skills/coolify-inventory/
+  ubuntu:/srv/openclaw/skills/coolify-inventory/
 rsync -az --no-owner --no-group --delete \
   "$PROJ/skills/tailscale-inventory/" \
-  ubuntu:/data/apps/openclaw/skills/tailscale-inventory/
+  ubuntu:/srv/openclaw/skills/tailscale-inventory/
 rsync -az --no-owner --no-group --delete \
   "$PROJ/skills/app-dashboard-inventory/" \
-  ubuntu:/data/apps/openclaw/skills/app-dashboard-inventory/
+  ubuntu:/srv/openclaw/skills/app-dashboard-inventory/
 rsync -az --no-owner --no-group --delete \
   "$PROJ/skills/diagnostics/" \
-  ubuntu:/data/apps/openclaw/skills/diagnostics/
-# Optional: package src for non-vendored imports
+  ubuntu:/srv/openclaw/skills/diagnostics/
 rsync -az --no-owner --no-group --delete \
-  "$PROJ/src/" \
-  ubuntu:/data/apps/openclaw/src/
-scp "$PROJ/deploy/deploy-skill.sh" ubuntu:/data/apps/openclaw/deploy-skill.sh
-ssh ubuntu 'chmod +x /data/apps/openclaw/deploy-skill.sh'
+  "$PROJ/skills/coolify-readonly/" \
+  ubuntu:/srv/openclaw/skills/coolify-readonly/
+rsync -az --no-owner --no-group --delete \
+  "$PROJ/skills/infrastructure-inventory/" \
+  ubuntu:/srv/openclaw/skills/infrastructure-inventory/
+scp "$PROJ/deploy/deploy-skill.sh" ubuntu:/srv/openclaw/deploy-skill.sh
+ssh ubuntu 'chmod +x /srv/openclaw/deploy-skill.sh'
 ```
 
-## Deploy into OpenClaw runtime
+## Container mount (Coolify compose)
 
-On the host:
+```yaml
+volumes:
+  - 'syowig5e8r47c96qh26btdc0_openclaw-data:/data'
+  - '/srv/knowledge:/knowledge'
+  - '/srv/openclaw/skills:/srv/openclaw/skills'
+```
+
+## Live OpenClaw config
+
+In `/data/.openclaw/openclaw.json` (inside the OpenClaw volume):
+
+```json5
+{
+  skills: {
+    load: {
+      extraDirs: ["/srv/openclaw/skills"],
+      watch: true,
+    },
+    // ... existing entries ...
+  },
+}
+```
+
+`extraDirs` is lowest precedence. A same-named skill under
+`/data/workspace/skills/` still wins. Prefer editing the library and
+removing stale workspace copies of inventory skills.
+
+## Optional workspace copy
+
+If you still want a workspace override/copy:
 
 ```bash
-/data/apps/openclaw/deploy-skill.sh coolify-inventory
-/data/apps/openclaw/deploy-skill.sh tailscale-inventory
-/data/apps/openclaw/deploy-skill.sh app-dashboard-inventory
-/data/apps/openclaw/deploy-skill.sh diagnostics/check_tailnet_urls
-/data/apps/openclaw/deploy-skill.sh diagnostics/diagnose_tailnet_service
+/srv/openclaw/deploy-skill.sh coolify-inventory
+/srv/openclaw/deploy-skill.sh tailscale-inventory
+/srv/openclaw/deploy-skill.sh app-dashboard-inventory
+/srv/openclaw/deploy-skill.sh diagnostics/check_tailnet_urls
+/srv/openclaw/deploy-skill.sh diagnostics/diagnose_tailnet_service
 ```
-
-This copies:
-
-```text
-/data/apps/openclaw/skills/<skill>
-  →  container:/data/workspace/skills/<skill>
-```
-
-via `docker cp` (no Compose changes, no `openclaw.json` edits).
 
 ## Inventory output
 
@@ -64,6 +89,4 @@ via `docker cp` (no Compose changes, no `openclaw.json` edits).
 /data/apps/inventory/app-dashboard.yaml   # app-dashboard-inventory
 ```
 
-Then ask OpenClaw: **Refresh the Coolify inventory.**, **Refresh the Tailscale inventory.**, **Refresh the app dashboard inventory.**, or **Check Tailnet URLs.**
-
-Do **not** bind-mount `/data/apps/openclaw` over OpenClaw’s live config directory.
+Do **not** bind-mount `/data/apps/openclaw` or `/srv/openclaw` over OpenClaw’s live config directory (`/data/.openclaw`).

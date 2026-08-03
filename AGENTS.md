@@ -30,8 +30,8 @@ OpenClaw skills/workflows for **read-only** Coolify + Tailscale discovery via MC
 |------|------|
 | OpenClaw live config | Dynamic — register MCP via CLI/UI; never bind-mount over it |
 | `/knowledge/inventory/` | Inventory SoT + generated + history + logs |
-| `/data/apps/openclaw/skills/` | **Dev staging** for skills (promote to `/data/workspace/skills/` later) |
-| `/data/apps/openclaw/scripts/` | Dev staging for helper scripts |
+| `/srv/openclaw/skills/` | **Canonical skills library** (host; bind-mounted into OpenClaw) |
+| `/data/apps/openclaw/` | Legacy staging / MCP fragments only |
 | Coolify MCP URL | `https://ubuntu-server.tiger-bushmaster.ts.net/mcp` |
 
 ## Precedence for inventory

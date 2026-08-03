@@ -28,16 +28,15 @@ OpenClaw must not deploy, restart, delete, or reconfigure Coolify/Tailscale thro
 |------|------|
 | OpenClaw live config | Managed dynamically inside OpenClaw — **do not bind-mount** a host `openclaw.json` over it |
 | `/knowledge/inventory/` | Generated + canonical inventory (knowledge mount) |
-| `/data/apps/openclaw/skills/` | **Dev staging** for skills (transfer to `/data/workspace/skills/` later) |
-| `/data/apps/openclaw/scripts/` | Dev staging for helper scripts |
-| `/data/apps/openclaw/docs/` | Ops docs mirror |
+| `/srv/openclaw/skills/` | **Canonical skills library** (bind-mounted + `skills.load.extraDirs`) |
+| `/data/apps/openclaw/` | Legacy staging / MCP config fragments (not the skills library) |
 
 ## Quick start
 
 1. Follow [`docs/ops-verification.md`](docs/ops-verification.md) (knowledge mount + inventory dirs).
 2. Create a Coolify **read-only** token; inject as OpenClaw env `COOLIFY_MCP_TOKEN` (never commit).
 3. Register MCP server `coolify-readonly` via `openclaw mcp set` / Control UI using [`config/coolify-readonly.mcp.json`](config/coolify-readonly.mcp.json) (endpoint: `https://ubuntu-server.tiger-bushmaster.ts.net/mcp`).
-4. During development, sync skills/scripts to **`/data/apps/openclaw/skills`** (see [`deploy/README.md`](deploy/README.md)); copy into `/data/workspace/skills/` when ready for OpenClaw to load them.
+4. Sync skills to **`/srv/openclaw/skills`** (see [`deploy/README.md`](deploy/README.md)). With the bind-mount + `extraDirs` configured, OpenClaw loads them live.
 5. Ask OpenClaw: **Generate Coolify inventory** or **Refresh infrastructure inventory**.
 
 ## Skills
