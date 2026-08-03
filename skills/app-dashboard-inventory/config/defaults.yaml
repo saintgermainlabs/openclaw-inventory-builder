@@ -1,0 +1,49 @@
+inventory:
+  output: /data/apps/inventory/app-dashboard.yaml
+
+coolify:
+  inclusion_tag: dashboard
+  category_prefix: "category:"
+
+tailscale:
+  domain_suffix: tiger-bushmaster.ts.net
+  prefer_https: true
+
+matching:
+  normalize_names: true
+  fail_on_ambiguous_match: false
+
+exclusions:
+  resource_name_suffixes:
+    - "-tailscale"
+  components:
+    - tailscale-sidecar
+
+categories:
+  infrastructure:
+    label: Infrastructure
+    order: 10
+  identity:
+    label: Identity & Access
+    order: 20
+  security:
+    label: Security
+    order: 30
+  monitoring:
+    label: Monitoring
+    order: 40
+  ai:
+    label: AI & Automation
+    order: 50
+  knowledge:
+    label: Knowledge
+    order: 60
+  development:
+    label: Development
+    order: 70
+  productivity:
+    label: Productivity
+    order: 80
+  other:
+    label: Other
+    order: 999

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sg-labs.local/schemas/tailscale-inventory/inventory.json",
+  "title": "Tailscale device inventory",
+  "type": "object",
+  "required": ["version", "source", "generated_at", "devices"],
+  "additionalProperties": true,
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "generated_at": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "required": ["type", "mcp_server"],
+      "properties": {
+        "type": { "const": "tailscale" },
+        "mcp_server": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "tailnet": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "devices": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/device"
+      }
+    }
+  },
+  "$defs": {
+    "device": {
+      "type": "object",
+      "required": ["id", "hostname"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "hostname": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "online": { "type": "boolean" },
+        "addresses": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "os": { "type": "string" },
+        "client_version": { "type": "string" },
+        "node_id": { "type": "string" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# Optional presentation and matching metadata.
+# Coolify remains authoritative — do not invent apps from this file alone.
+apps:
+  open-webui:
+    aliases:
+      - ollama-webui
+    label: Open WebUI
+    description: Local AI chat interface
+    icon: open-webui
+    order: 10
+
+  silver-bullet:
+    aliases:
+      - silverbullet
+    label: SilverBullet
+    description: Knowledge base
+    icon: silverbullet
+    order: 20

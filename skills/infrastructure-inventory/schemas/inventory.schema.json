@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sg-labs.local/schemas/infrastructure-inventory/services.json",
+  "title": "Infrastructure inventory services.yaml",
+  "type": "object",
+  "required": ["version", "generated_at", "services"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "minLength": 1,
+      "description": "ISO-8601 timestamp"
+    },
+    "unmatched": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "coolify": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "tailscale": {
+          "type": "array",
+          "items": { "type": "object" }
+        }
+      }
+    },
+    "services": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9_-]*$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/service"
+      }
+    }
+  },
+  "$defs": {
+    "service": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "type": "string" },
+        "sources": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "coolify": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "resource_id": { "type": "string" },
+                "resource_type": {
+                  "type": "string",
+                  "enum": ["application", "service", "database", "server"]
+                },
+                "project": { "type": "string" },
+                "environment": { "type": "string" }
+              }
+            },
+            "tailscale": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "hostname": { "type": "string" },
+                "device_id": { "type": "string" },
+                "node_id": { "type": "string" }
+              }
+            }
+          }
+        },
+        "network": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "private_url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "addresses": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "status": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "application": {
+              "type": "string",
+              "enum": ["running", "stopped", "degraded", "unknown"]
+            },
+            "tailnet": {
+              "type": "string",
+              "enum": ["online", "offline", "unknown"]
+            }
+          }
+        },
+        "correlation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": ["confirmed", "probable", "unmatched", "conflict"]
+            },
+            "confidence": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "evidence": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "dashboard": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "category": { "type": "string" },
+            "icon": { "type": "string" },
+            "order": { "type": "integer" },
+            "name": { "type": "string" }
+          }
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

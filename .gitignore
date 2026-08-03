@@ -1,0 +1,35 @@
+# Secrets and local env
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Live host config copies (never commit)
+/data/
+openclaw.json
+!config/openclaw.json.example
+
+# Live knowledge inventory (generated on host; examples stay)
+/knowledge/
+**/services.yaml
+!examples/**/*.yaml
+!skills/**/templates/**
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Node / Python
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/

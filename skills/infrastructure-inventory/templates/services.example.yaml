@@ -1,0 +1,38 @@
+version: 1
+
+generated_at: "2026-08-02T21:00:00-05:00"
+
+services:
+
+  uptime-kuma:
+    name: "Uptime Kuma"
+    type: monitoring
+
+    sources:
+      coolify:
+        resource_id: "abc123"
+        resource_type: service
+
+      tailscale:
+        hostname: "uptime-kuma"
+
+    network:
+      private_url: "https://uptime-kuma.tiger-bushmaster.ts.net"
+
+    status:
+      application: running
+      tailnet: online
+
+    correlation:
+      status: confirmed
+      confidence: 1.0
+      evidence:
+        - "exact Tailscale hostname == Coolify service name"
+
+    dashboard:
+      enabled: true
+      category: Monitoring
+
+unmatched:
+  coolify: []
+  tailscale: []

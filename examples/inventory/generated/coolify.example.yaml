@@ -1,0 +1,12 @@
+generated_at: "2026-08-02T21:00:00-05:00"
+source: coolify-readonly
+applications: []
+services:
+  - id: "abc123"
+    name: uptime-kuma
+    status: running
+    server: hetzner-main
+databases: []
+servers:
+  - id: "server-1"
+    name: localhost

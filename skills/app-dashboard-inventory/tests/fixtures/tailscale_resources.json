@@ -1,0 +1,35 @@
+{
+  "devices": [
+    {
+      "id": "n1",
+      "hostname": "uptime-kuma",
+      "dns_name": "uptime-kuma.tiger-bushmaster.ts.net",
+      "online": true,
+      "tags": ["tag:monitoring"]
+    },
+    {
+      "id": "n2",
+      "hostname": "dom-laptop",
+      "dns_name": "dom-laptop.tiger-bushmaster.ts.net",
+      "online": true
+    },
+    {
+      "id": "n3",
+      "hostname": "open-webui",
+      "name": "open-webui.tiger-bushmaster.ts.net",
+      "online": true
+    },
+    {
+      "id": "n4",
+      "hostname": "dup-a",
+      "dns_name": "dup-a.tiger-bushmaster.ts.net",
+      "online": true
+    },
+    {
+      "id": "n5",
+      "hostname": "dup-a",
+      "dns_name": "dup-a-2.tiger-bushmaster.ts.net",
+      "online": false
+    }
+  ]
+}

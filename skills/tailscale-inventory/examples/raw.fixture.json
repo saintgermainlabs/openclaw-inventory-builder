@@ -1,0 +1,30 @@
+{
+  "tailnet": {
+    "dns_suffix": "tiger-bushmaster.ts.net"
+  },
+  "devices": [
+    {
+      "id": "n1",
+      "hostname": "uptime-kuma",
+      "name": "uptime-kuma.tiger-bushmaster.ts.net",
+      "online": true,
+      "addresses": ["100.64.0.10"],
+      "tags": ["tag:monitoring"],
+      "os": "linux"
+    },
+    {
+      "id": "n2",
+      "hostname": "ubuntu-server",
+      "name": "ubuntu-server.tiger-bushmaster.ts.net",
+      "online": true,
+      "addresses": ["100.64.0.1"],
+      "os": "linux"
+    },
+    {
+      "id": "n3",
+      "hostname": "offline-box",
+      "online": false,
+      "addresses": ["100.64.0.99"]
+    }
+  ]
+}

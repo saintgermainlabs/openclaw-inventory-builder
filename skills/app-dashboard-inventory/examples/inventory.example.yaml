@@ -1,0 +1,55 @@
+version: 1
+
+generated:
+  at: "2026-08-03T10:30:00Z"
+  sources:
+    - coolify
+    - tailscale
+
+apps:
+  portal:
+    hostname: portal
+    dns_name: portal.tiger-bushmaster.ts.net
+    online: true
+    tailscale-tags:
+      - tag:portal
+      - tag:ui
+    coolify_id: p14yu0he1075q047r4dbk50a
+    status: running
+    tags:
+      - dashboard
+    labels: {}
+    name: server-portal:main-p14yu0he1075q047r4dbk50a
+    project: Portal
+    resource_type: application
+
+  uptime-kuma:
+    hostname: uptime-kuma
+    dns_name: uptime-kuma.tiger-bushmaster.ts.net
+    online: true
+    tailscale-tags:
+      - tag:monitoring
+    coolify_id: abc123
+    status: running
+    tags:
+      - dashboard
+      - category:monitoring
+    labels: {}
+    name: Uptime Kuma
+    project: infrastructure
+    resource_type: application
+
+  code-server:
+    hostname: null
+    dns_name: null
+    online: null
+    tailscale-tags: []
+    coolify_id: "5"
+    status: stopped
+    tags:
+      - dashboard
+      - category:development
+    labels: {}
+    name: code-server
+    project: development
+    resource_type: application

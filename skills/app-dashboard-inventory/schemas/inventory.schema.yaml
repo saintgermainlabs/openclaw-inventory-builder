@@ -1,0 +1,87 @@
+# Documented schema for app-dashboard.yaml (version 1) — flat apps map.
+# Validated imperatively by scripts/validate_inventory.py.
+
+type: object
+required:
+  - version
+  - generated
+  - apps
+
+properties:
+  version:
+    type: integer
+    minimum: 1
+
+  generated:
+    type: object
+    required:
+      - at
+      - sources
+    properties:
+      at:
+        type: string
+      sources:
+        type: array
+        items:
+          type: string
+          enum: [coolify, tailscale]
+
+  apps:
+    type: object
+    description: Map of app key → node (template below)
+    additionalProperties:
+      type: object
+      required:
+        - hostname
+        - dns_name
+        - online
+        - tailscale-tags
+        - coolify_id
+        - status
+        - tags
+        - labels
+        - name
+        - project
+        - resource_type
+      properties:
+        hostname:
+          type: [string, "null"]
+        dns_name:
+          type: [string, "null"]
+        online:
+          type: [boolean, "null"]
+        tailscale-tags:
+          type: array
+          items:
+            type: string
+        coolify_id:
+          type: string
+        status:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        labels:
+          type: object
+        name:
+          type: string
+        project:
+          type: [string, "null"]
+        resource_type:
+          type: string
+
+# Example node:
+# apps:
+#   portal:
+#     hostname: portal
+#     dns_name: portal.tiger-bushmaster.ts.net
+#     online: true
+#     tailscale-tags: ["tag:portal", "tag:ui"]
+#     coolify_id: p14yu0he1075q047r4dbk50a
+#     status: running
+#     tags: ["dashboard"]
+#     labels: {}
+#     name: server-portal:main-p14yu0he1075q047r4dbk50a
+#     project: Portal
+#     resource_type: application

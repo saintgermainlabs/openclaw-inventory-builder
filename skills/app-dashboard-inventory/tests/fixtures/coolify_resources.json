@@ -1,0 +1,74 @@
+{
+  "resources": [
+    {
+      "id": "1",
+      "name": "Uptime Kuma",
+      "project": "infrastructure",
+      "environment": "production",
+      "resource_type": "application",
+      "status": "running",
+      "tags": ["dashboard", "category:monitoring"],
+      "labels": {}
+    },
+    {
+      "id": "2",
+      "name": "PostgreSQL",
+      "project": "infrastructure",
+      "environment": "production",
+      "resource_type": "database",
+      "status": "running",
+      "tags": ["category:database"],
+      "labels": {}
+    },
+    {
+      "id": "3",
+      "name": "uptime-kuma-tailscale",
+      "project": "infrastructure",
+      "environment": "production",
+      "resource_type": "service",
+      "status": "running",
+      "tags": [],
+      "labels": {
+        "app.component": "tailscale-sidecar"
+      }
+    },
+    {
+      "id": "4",
+      "name": "Open WebUI",
+      "project": "ai",
+      "environment": "production",
+      "resource_type": "application",
+      "status": "running",
+      "tags": ["dashboard", "category:ai"],
+      "labels": {}
+    },
+    {
+      "id": "5",
+      "name": "code-server",
+      "project": "development",
+      "environment": "production",
+      "resource_type": "application",
+      "status": "stopped",
+      "tags": ["dashboard", "category:development"],
+      "labels": {}
+    },
+    {
+      "id": "6",
+      "name": "Mystery App",
+      "project": "misc",
+      "environment": "production",
+      "resource_type": "application",
+      "status": "running",
+      "tags": ["dashboard"],
+      "labels": {}
+    },
+    {
+      "id": "7",
+      "name": "sidecar-by-suffix-tailscale",
+      "resource_type": "service",
+      "status": "running",
+      "tags": ["dashboard", "category:monitoring"],
+      "labels": {}
+    }
+  ]
+}

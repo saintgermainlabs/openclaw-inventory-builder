@@ -1,0 +1,36 @@
+version: 1
+source:
+  type: coolify
+  mcp_server: coolify-readonly
+generated_at: "2026-08-03T00:00:00Z"
+projects:
+  demo-project:
+    id: proj-1
+    name: Demo Project
+    environments:
+      production:
+        id: env-prod
+        name: production
+        applications:
+          wordpress:
+            id: app-wp
+            name: WordPress
+            status: running
+            domains:
+              - https://example.com
+            git:
+              repository: owner/repository
+              branch: main
+            server:
+              name: ubuntu-server
+        services:
+          redis:
+            id: svc-redis
+            name: Redis
+            status: running
+        databases:
+          postgresql:
+            id: db-pg
+            name: PostgreSQL
+            type: postgresql
+            status: running

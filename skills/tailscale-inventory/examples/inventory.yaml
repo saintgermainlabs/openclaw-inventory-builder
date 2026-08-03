@@ -1,0 +1,32 @@
+version: 1
+source:
+  type: tailscale
+  mcp_server: tailscale-readonly
+generated_at: "2026-08-03T00:00:00Z"
+tailnet:
+  dns_suffix: tiger-bushmaster.ts.net
+devices:
+  offline-box:
+    id: n3
+    hostname: offline-box
+    online: false
+    addresses:
+      - 100.64.0.99
+  ubuntu-server:
+    id: n2
+    hostname: ubuntu-server
+    name: ubuntu-server.tiger-bushmaster.ts.net
+    online: true
+    addresses:
+      - 100.64.0.1
+    os: linux
+  uptime-kuma:
+    id: n1
+    hostname: uptime-kuma
+    name: uptime-kuma.tiger-bushmaster.ts.net
+    online: true
+    addresses:
+      - 100.64.0.10
+    tags:
+      - tag:monitoring
+    os: linux

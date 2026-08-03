@@ -1,0 +1,16 @@
+# Manual dashboard preferences — survive inventory refresh.
+# Precedence: discovery → normalize → correlate → overrides → services.yaml
+
+openclaw:
+  dashboard:
+    name: "OpenClaw"
+    category: "Agents"
+    icon: "openclaw"
+    order: 10
+
+uptime-kuma:
+  dashboard:
+    name: "Uptime"
+    category: "Monitoring"
+    icon: "uptime-kuma"
+    order: 20

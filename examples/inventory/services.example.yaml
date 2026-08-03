@@ -1,0 +1,32 @@
+# Example inventory tree (copy shape to /knowledge/inventory/ on host)
+
+version: 1
+generated_at: "2026-08-02T21:00:00-05:00"
+
+services:
+  openclaw:
+    name: OpenClaw
+    type: agent-platform
+    sources:
+      coolify:
+        resource_id: "openclaw-z9rqy3p5e57o4u4kxexeflbg"
+        resource_type: service
+      tailscale:
+        hostname: openclaw
+    network:
+      private_url: "https://openclaw.tiger-bushmaster.ts.net"
+    status:
+      application: running
+      tailnet: online
+    correlation:
+      status: confirmed
+      confidence: 1.0
+      evidence:
+        - "exact Tailscale hostname == Coolify service name"
+    dashboard:
+      enabled: true
+      category: Agents
+
+unmatched:
+  coolify: []
+  tailscale: []
